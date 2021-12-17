@@ -68,7 +68,7 @@ with col1:
 
 with col2:
 
-    @ st.cache(ttl=24*60*60)
+    @ st.cache(allow_output_mutation=True)
     def load_data(ticker):
         data = yf.download(ticker, START, TODAY)
         data.reset_index(inplace=True)
