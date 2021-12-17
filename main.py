@@ -52,8 +52,12 @@ with col1:
     # Ticker current stock price
     stock_change = tickerData.info['currentPrice'] - \
         tickerData.info['previousClose']
+    stock_change_percentage = abs(
+        stock_change)/tickerData.info['previousClose']*100
+    if stock_change < 0:
+        stock_change_percentage = 0-stock_change_percentage
     st.metric("Current Price",
-              "$" + format(tickerData.info['currentPrice']), '{:.2f}'.format(stock_change)+"%")
+              "$" + format(tickerData.info['currentPrice']), '{:.2f}'.format(stock_change_percentage)+"%")
 
     st.markdown("")
 
