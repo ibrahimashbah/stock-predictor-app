@@ -7,6 +7,26 @@ from fbprophet.plot import plot_plotly
 import pandas as pd
 from plotly import graph_objs as go
 
+st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
+
+st.markdown("""
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #3498DB;">
+  <a class="navbar-brand" href="https://youtube.com/dataprofessor" target="_blank">Ibrahim Ashbah</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://ibrahimashbah.de/" target="_blank">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.linkedin.com/in/ibrahim-al-ashbah/" target="_blank">LinkedIn</a>
+    </ul>
+  </div>
+</nav>
+""", unsafe_allow_html=True)
+
 START = "2018-01-01"
 TODAY = date.today().strftime("%Y-%m-%d")
 
