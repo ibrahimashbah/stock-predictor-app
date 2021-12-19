@@ -59,7 +59,7 @@ with st.expander("What are the necessery skills to build like this app? "):
                 - Good mathematical, data analytics and problem solving skills ✅
                 - Knowledge of advanced statistical techniques and concepts ✅
                 - Analyze model performance and data accuracy ✅
-                - Familiar with Machine Learning techniques, Pandas, NumPy and SciPy ✅
+                - Familiar with Machine Learning techniques, Pandas, NumPy, SciPy and ggplot ✅
                 - Build PowerPoint presentations to recommend business decisions ✅
         """)
 
