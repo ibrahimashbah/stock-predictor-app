@@ -30,12 +30,12 @@ st.markdown("""
 START = "2018-01-01"
 TODAY = date.today().strftime("%Y-%m-%d")
 
-# Page configration details
-st.set_page_config(
-    page_title="SPP",
-    page_icon="📈",
+# # Page configration details
+# st.set_page_config(
+#     page_title="SPP",
+#     page_icon="📈",
    
-)
+# )
 
 # Header elements
 st.header("Stock Price Predictor")
