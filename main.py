@@ -34,7 +34,7 @@ TODAY = date.today().strftime("%Y-%m-%d")
 st.set_page_config(
     page_title="SPP",
     page_icon="📈",
-    layout="wide",
+   
 )
 
 # Header elements
