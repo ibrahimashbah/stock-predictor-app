@@ -49,18 +49,18 @@ A stock forecast app for Largest German companies and S&P500 companies.
 
 
 with st.expander("What are the necessery skills to build like this app? "):
-    st.text("""
-            - Web Scrabing ✅
-            - Data Cleaning ✅
-            - Data Wrangling ✅
-            - Data extraction and manuplation from Excel/SQL ✅
-            - Data manipulation from large data sets ✅
-            - Coding knowledge with several languages: Python, HTML/CSS, Jave ✅
-            - Good mathematical, data analytics and problem solving skills ✅
-            - Knowledge of advanced statistical techniques and concepts ✅
-            - Analyze model performance and data accuracy ✅
-            - Familiar with Machine Learning techniques, Pandas, NumPy and SciPy ✅
-            - Build PowerPoint presentations to recommend business decisions ✅
+    st.write("""
+                - Web Scrabing ✅
+                - Data Cleaning ✅
+                - Data Wrangling ✅
+                - Data extraction and manuplation from Excel/SQL ✅
+                - Data manipulation from large data sets ✅
+                - Coding knowledge with several languages: Python, HTML/CSS, Jave ✅
+                - Good mathematical, data analytics and problem solving skills ✅
+                - Knowledge of advanced statistical techniques and concepts ✅
+                - Analyze model performance and data accuracy ✅
+                - Familiar with Machine Learning techniques, Pandas, NumPy and SciPy ✅
+                - Build PowerPoint presentations to recommend business decisions ✅
         """)
 
 with st.expander("How the model works?"):
