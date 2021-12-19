@@ -9,7 +9,7 @@ from plotly import graph_objs as go
 
 # Page configration details
 st.set_page_config(
-    page_title="SPP",
+    page_title="Stock Forecast App",
     page_icon="📈",
 
 
