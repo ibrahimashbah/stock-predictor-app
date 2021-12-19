@@ -152,4 +152,9 @@ forecast = m.predict(future)
 
 # Ploting
 fig1 = plot_plotly(m, forecast)
+fig1.update_layout(
+    xaxis_title="Date",
+    yaxis_title="Price",
+
+)
 placeholder.plotly_chart(fig1, use_container_width=True)
