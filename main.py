@@ -11,19 +11,17 @@ from plotly import graph_objs as go
 st.set_page_config(
     page_title="SPP",
     page_icon="📈",
-    layout="wide",
-   
+
+
 )
 hide_st_style = """
             <style>
-            #MainMenu {visibility: hidden;}
+            # MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
-
-col0 = st.columns(1)
 
 st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
 st.markdown("""
@@ -44,82 +42,114 @@ st.markdown("""
 </nav>
 """, unsafe_allow_html=True)
 
+# Header elements
+st.markdown('''# **Stock Forecast App**
+A stock forecast app for Largest German companies and S&P500 companies.
+''')
+
+
+with st.expander("What are the necessery skills to build like this app? "):
+    st.write("""
+            - web scrabing ✅
+            - data wrangling ✅
+            - statistical ✅
+            librarby use, pandas, metapolite, numby. sicklert
+            model creating and training
+            Strong analytical skills
+            python
+            machine learning
+            Excel✅
+            SQL✅
+
+        """)
+
+with st.expander("How the model works?"):
+    st.write("""
+         The chart above shows some numbers I picked for you.
+         I rolled actual dice for these, so they're *guaranteed* to
+         be random.
+     """)
+    st.image("https://www.ncrypted.net/blog/wp-content/uploads/2019/02/Freemium.png")
+
+
 START = "2018-01-01"
 TODAY = date.today().strftime("%Y-%m-%d")
 
 
+# Select Market
+st.sidebar.markdown("")
+st.sidebar.markdown("")
 
-# Header elements
-st.header("Stock Price Predictor")
-st.write("Credit by [Ibrahim Ashbah](http://ibrahimashbah.de/)")
-st.markdown("____")
-st.markdown("")  # Make new empty row
+selected_market = st.sidebar.radio('Markets', ['Largest German companies',
+                                               'S&P 500'])
 
+# Load Market Data
+if selected_market == "Largest German companies":
+    stocks = pd.read_csv(
+        'https://raw.githubusercontent.com/ibrahimashbah/stock-predictor-app/f531e6815e8aabd3bdeac8eb257ddf03b4b158cc/Largest%20German%20companies%20code.txt', header=None)
+else:
+    stocks = pd.read_csv(
+        'https://raw.githubusercontent.com/ibrahimashbah/stock-predictor-app/main/S%26P%20500%20index%20code.txt', header=None)
+st.sidebar.markdown("____")
+st.sidebar.markdown("")
 
-# Create layout of two columns
-col1, col2 = st.columns((2, 2))
+selected_stock = st.sidebar.selectbox(
+    "Stock", stocks)
 
+# Ticker information
+tickerData = yf.Ticker(selected_stock)
 
-with col1:
+# Ticker current stock price
+stock_change = tickerData.info['currentPrice'] - \
+    tickerData.info['previousClose']
+stock_change_percentage = abs(
+    stock_change)/tickerData.info['previousClose']*100
+if stock_change < 0:
+    stock_change_percentage = 0-stock_change_percentage
 
-    # Select Market
-    selected_market = st.radio('Markets', ['Largest German companies',
-                                           'S&P 500'])
-
-    # Load Market Data
-    if selected_market == "Largest German companies":
-        stocks = pd.read_csv(
-            'https://raw.githubusercontent.com/ibrahimashbah/stock-predictor-app/f531e6815e8aabd3bdeac8eb257ddf03b4b158cc/Largest%20German%20companies%20code.txt', header=None)
-    else:
-        stocks = pd.read_csv(
-            'https://raw.githubusercontent.com/ibrahimashbah/stock-predictor-app/main/S%26P%20500%20index%20code.txt', header=None)
-
-    selected_stock = st.selectbox(
-        "Stock", stocks)
-    st.markdown("____")
-
-    # Ticker information
-    tickerData = yf.Ticker(selected_stock)
-
-    # Ticker current stock price
-    stock_change = tickerData.info['currentPrice'] - \
-        tickerData.info['previousClose']
-    stock_change_percentage = abs(
-        stock_change)/tickerData.info['previousClose']*100
-    if stock_change < 0:
-        stock_change_percentage = 0-stock_change_percentage
+st.sidebar.markdown("")
+cols_at_sidabar = st.sidebar.columns([1, 1])
+with cols_at_sidabar[0]:
+    string_logo = '<img src=%s>' % tickerData.info['logo_url']
+    st.markdown(string_logo, unsafe_allow_html=True)
+with cols_at_sidabar[-1]:
     st.metric("Current Price",
               "$" + format(tickerData.info['currentPrice']), '{:.2f}'.format(stock_change_percentage)+"%")
 
-    st.markdown("")
 
-    # adjust number of years
-    n_years = st.slider("Years of prediction", 1, 4)
-    period = n_years * 365
+# adjust number of years
+st.sidebar.markdown("")
+st.sidebar.markdown("")
+st.sidebar.markdown("")
+n_years = st.sidebar.slider("Years of prediction", 1, 4)
+period = n_years * 365
+
+placeholder = st.empty()
+placeholder.header(
+    "Loading the plot...")
 
 
-with col2:
+@ st.cache(allow_output_mutation=True)
+def load_data(ticker):
+    data = yf.download(ticker, START, TODAY)
+    data.reset_index(inplace=True)
+    return data
 
-    @ st.cache(allow_output_mutation=True)
-    def load_data(ticker):
-        data = yf.download(ticker, START, TODAY)
-        data.reset_index(inplace=True)
-        return data
 
-    data = load_data(selected_stock)
+data = load_data(selected_stock)
 
-    # Forecasting
+# Forecasting
 
-    # Preparing data for model
-    df_train = data[['Date', 'Close']]
-    df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
+# Preparing data for model
+df_train = data[['Date', 'Close']]
+df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
-    # Training
-    m = Prophet()
-    m.fit(df_train)
-    future = m.make_future_dataframe(periods=period)
-    forecast = m.predict(future)
+# Training
+m = Prophet()
+m.fit(df_train)
+future = m.make_future_dataframe(periods=period)
+forecast = m.predict(future)
 
-    # Ploting
-    fig1 = plot_plotly(m, forecast)
-    st.plotly_chart(fig1, use_container_width=True)
+# Ploting
+fig1 = plot_plotly(m, forecast)
+placeholder.plotly_chart(fig1, use_container_width=True)
