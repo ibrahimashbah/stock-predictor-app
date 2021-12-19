@@ -59,17 +59,29 @@ with st.expander("What are the necessery skills to build like this app? "):
                 - Good mathematical, data analytics and problem solving skills ✅
                 - Knowledge of advanced statistical techniques and concepts ✅
                 - Analyze model performance and data accuracy ✅
-                - Familiar with Machine Learning techniques, Pandas, NumPy, SciPy and ggplot ✅
+                - Familiar with Machine Learning techniques, Pandas, NumPy and SciPy ✅
                 - Build PowerPoint presentations to recommend business decisions ✅
         """)
 
-with st.expander("How the model works?"):
+with st.expander("How the model (Prophet) works?"):
     st.write("""
-         The chart above shows some numbers I picked for you.
-         I rolled actual dice for these, so they're *guaranteed* to
-         be random.
+        Prophet is a procedure for forecasting time series data based on an additive model.
+
+        Prophet use a decomposable time series model with three main
+        model components: trend, seasonality, and holidays. They are combined in the following
+        equation:
+    """)
+    st.latex(r'''
+     y(t)= g(t) + s(t) + h(t) + εt
+     ''')
+
+    st.markdown("""
+            Here _g(t)_ is the trend function which models non-periodic changes in the value of the
+        time series, _s(t)_ represents periodic changes (e.g., weekly and yearly seasonality), and
+        _h(t)_ represents the effects of holidays which occur on potentially irregular schedules over
+        one or more days. The error term _εt_ represents any idiosyncratic changes which are not
+        accommodated by the model.
      """)
-    st.image("https://www.ncrypted.net/blog/wp-content/uploads/2019/02/Freemium.png")
 
 
 START = "2018-01-01"
