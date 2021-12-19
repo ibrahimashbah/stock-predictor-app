@@ -51,7 +51,7 @@ TODAY = date.today().strftime("%Y-%m-%d")
 
 # Header elements
 st.header("Stock Price Predictor")
-st.write("Hi, Watch my [30 second video](http://youtube.com/) to understand how it works, Credit by [Ibrahim Ashbah](http://ibrahimashbah.de/)")
+st.write("Credit by [Ibrahim Ashbah](http://ibrahimashbah.de/)")
 st.markdown("____")
 st.markdown("")  # Make new empty row
 
