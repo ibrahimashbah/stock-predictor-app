@@ -49,7 +49,7 @@ A stock forecast app for Largest German companies and S&P500 companies.
 
 
 with st.expander("What are the necessery skills to build like this app? "):
-    st.write("""
+    st.text("""
             - Web Scrabing ✅
             - Data Cleaning ✅
             - Data Wrangling ✅
