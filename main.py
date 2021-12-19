@@ -7,6 +7,14 @@ from fbprophet.plot import plot_plotly
 import pandas as pd
 from plotly import graph_objs as go
 
+# Page configration details
+st.set_page_config(
+    page_title="SPP",
+    page_icon="📈",
+    layout="wide",
+   
+)
+
 col0 = st.columns(1)
 
 st.markdown('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">', unsafe_allow_html=True)
@@ -31,13 +39,7 @@ st.markdown("""
 START = "2018-01-01"
 TODAY = date.today().strftime("%Y-%m-%d")
 
-# Page configration details
-st.set_page_config(
-    page_title="SPP",
-    page_icon="📈",
-    layout="wide",
-   
-)
+
 
 # Header elements
 st.header("Stock Price Predictor")
