@@ -137,8 +137,8 @@ n_years = st.sidebar.slider("Years of prediction", 1, 4)
 period = n_years * 365
 
 placeholder = st.empty()
-placeholder.header(
-    "Loading the plot...")
+placeholder.info(
+    "The model is analyzing historical data, please wait...")
 
 
 @ st.cache(allow_output_mutation=True)
