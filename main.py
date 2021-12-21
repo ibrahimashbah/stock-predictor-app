@@ -138,7 +138,7 @@ period = n_years * 365
 
 placeholder = st.empty()
 placeholder.info(
-    "The model is analyzing historical data, please wait...")
+    "Analyzing historical data and predict the future, please wait...")
 
 
 @ st.cache(allow_output_mutation=True)
